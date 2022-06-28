@@ -1,7 +1,33 @@
-import '../styles/globals.css'
+import Head from 'next/head'
+import React, { useRef } from 'react'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import NavigationBar from '../components/NavigationBar';
+import Intro from '../components/intro';
+import Trending from '../components/trending';
+const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop)  
 
-function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+
+export default function Home() {
+ const myRef = useRef(null)
+  const executeScroll = () => scrollToRef(myRef)
+
+
+ return (
+   <div className='htmlAll'>
+     <Head>
+       <title>Movie List</title>
+       <meta name="description" content="Movie List" />
+       <link rel="icon" href="/favicon.ico" />
+     </Head>
+
+     <div className='myBG'>
+       <NavigationBar></NavigationBar>
+       <Intro scroll = {executeScroll}></Intro>
+     </div>
+    
+      <div className='trending' ref={myRef}>
+         <Trending></Trending>
+      </div>
+   </div>
+ )
 }
-
-export default MyApp
